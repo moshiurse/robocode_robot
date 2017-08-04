@@ -1,24 +1,36 @@
-package LegendBot;
+package LegendBot; 
 import robocode.*;
-//import java.awt.Color;
+import java.awt.Color;
 
 // API help : http://robocode.sourceforge.net/docs/robocode/robocode/Robot.html
 
 /**
- * Legend - a robot by (your name here)
+ * Legend - a robot by (Moshiur Rahman)
  */
-public class Legend extends Robot
+public class Legend extends AdvancedRobot
 {
+		boolean peak;
 	/**
 	 * run: Legend's default behavior
 	 */
 	public void run() {
 		// Initialization of the robot should be put here
+			setBodyColor(Color.blue);
+			setBulletColor(Color.red);
+			setGunColor(Color.black);
+			setScanColor(Color.blue);
+			setRadarColor(Color.lightGray);
+			
 
-		// After trying out your robot, try uncommenting the import at the top,
-		// and the next line:
-
-		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
+		// initialization the movement speed
+		
+		double movement = Math.max(getBattleFieldWidth(),getBattleFieldHeight());
+		
+		//initialization peak to false
+		peak = false;
+		
+		turnLeft(getHeading() % 90);
+		ahead(movement);
 
 		// Robot main loop
 		while(true) {

@@ -9,7 +9,8 @@ import java.awt.Color;
  */
 public class Legend extends AdvancedRobot
 {
-		boolean peak;
+		
+		boolean movingForward;
 	/**
 	 * run: Legend's default behavior
 	 */
@@ -26,27 +27,16 @@ public class Legend extends AdvancedRobot
 		
 		double movement = Math.max(getBattleFieldWidth(),getBattleFieldHeight());
 		
-		//initialization peak to false
-		peak = false;
-		
 		turnLeft(getHeading() % 90);
 		ahead(movement);
-		
-		peak = true;
 		turnGunRight(90);
 		turnRight(90);
 
 		// Robot main loop
 		while(true) {
 			// Replace the next 4 lines with any behavior you would like
-			peak = true;
 			ahead(movement);
-			
-			peak =  false;
 			turnRight(90);
-			//turnGunRight(360);
-			//back(100);
-			//turnGunRight(360);
 		}
 	}
 
@@ -55,7 +45,8 @@ public class Legend extends AdvancedRobot
 	 */
 	public void onScannedRobot(ScannedRobotEvent e) {
 		// Replace the next line with any behavior you would like
-		fire(1);
+		fire(3);
+		setFire(Rules.MAX_BULLET_POWER);
 	}
 
 	/**
@@ -63,14 +54,40 @@ public class Legend extends AdvancedRobot
 	 */
 	public void onHitByBullet(HitByBulletEvent e) {
 		// Replace the next line with any behavior you would like
-		back(10);
+		reverseDirection();
+		
 	}
+	
+	public void reverseDirection() {
+		if (movingForward) {
+			setBack(40000);
+			movingForward = false;
+		} else {
+			setAhead(40000);
+			movingForward = true;
+		}
+	}
+
 	
 	/**
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
 		// Replace the next line with any behavior you would like
-		back(20);
+			back(20);
+		 	setTurnRight(90);
+   			setAhead(100);
+		
 	}	
+	
+		public void onHitRobot(HitRobotEvent event) {
+		       if (event.getBearing() > -90 && event.getBearing() <= 90) {
+		           setBack(100);
+		       } else {
+		           setAhead(100);
+		       }
+		   }
+	
+
+	
 }

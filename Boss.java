@@ -14,7 +14,11 @@ public class Boss extends Robot
 	 */
 	public void run() {
 		// Initialization of the robot should be put here
-
+			setBodyColor(Color.green);
+			setBulletColor(Color.red);
+			setGunColor(Color.green);
+			setScanColor(Color.green);
+			setRadarColor(Color.lightGray);
 		// After trying out your robot, try uncommenting the import at the top,
 		// and the next line:
 
@@ -36,6 +40,9 @@ public class Boss extends Robot
 	public void onScannedRobot(ScannedRobotEvent e) {
 		// Replace the next line with any behavior you would like
 		fire(1);
+		back(20);
+		turnRight(10);
+		
 	}
 
 	/**
@@ -44,6 +51,7 @@ public class Boss extends Robot
 	public void onHitByBullet(HitByBulletEvent e) {
 		// Replace the next line with any behavior you would like
 		back(10);
+		turn
 	}
 	
 	/**
